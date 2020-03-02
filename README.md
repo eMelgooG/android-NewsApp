@@ -4,4 +4,4 @@ articles and lists them in a ListView on the MainActivity. Clicking an item in t
 chosen article in a WebView.  
 # Demo  
   
-![](https://i.imgur.com/Bjz3kr9.gif)
+![](https://i.imgur.com/Bjz3kr9.gif)     ![](https://i.imgur.com/HDvWFf4.gif)
