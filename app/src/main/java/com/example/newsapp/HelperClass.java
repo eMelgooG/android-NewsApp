@@ -15,8 +15,9 @@ public class HelperClass {
     private static final String L1 = "https://hacker-news.firebaseio.com/v0/item/";
     private static final String L3 = ".json?print=pretty";
     private static final String HN_NEW_STORIES_LINK = "https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty";
+    private static final String HN_TOP_STORIES_LINK = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
 
-    public static void fetchDataNews() {
+    public static void fetchDataNewStories() {
         ArrayList<String> result = new ArrayList<>();
         String data;
         String element;
@@ -45,6 +46,34 @@ public class HelperClass {
         }
     }
 
+    public static void fetchDataBestStories() {
+        ArrayList<String> result = new ArrayList<>();
+        String data;
+        String element;
+        try {
+            DownloadJsonData dataTask = new DownloadJsonData();
+            data = dataTask.execute(HN_TOP_STORIES_LINK).get();
+
+            JSONArray arr = new JSONArray(data);
+            int numberOfResults = 20;
+            for (int i = 0; i < numberOfResults; i++) {
+                Integer jsonPart = arr.getInt(i);
+                dataTask = new DownloadJsonData();
+                element = dataTask.execute(L1 + jsonPart + L3).get();
+                JSONObject currentObject = new JSONObject(element);
+
+                if( currentObject.has("title") && currentObject.has("url")) {
+                    BestStoriesFragment.titles.add(currentObject.getString("title"));
+                    BestStoriesFragment.urls.add(currentObject.getString("url"));
+                }
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
    static class DownloadJsonData extends AsyncTask<String, Void, String> {
 
         @Override

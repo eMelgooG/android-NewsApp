@@ -31,6 +31,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 public static ArrayList<String> titles;
  public  static ArrayList<String> urls;
+ boolean bestStoriesFetched = false;
+ boolean jobStoriesFetched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public static ArrayList<String> titles;
 
     titles = new ArrayList<>();
     urls = new ArrayList<>();
-        HelperClass.fetchDataNews();
+        HelperClass.fetchDataNewStories();
 
 
 
@@ -62,6 +64,11 @@ public static ArrayList<String> titles;
                                                        @Override
                                                        public void onTabSelected(TabLayout.Tab tab) {
                                                            viewPager.setCurrentItem(tab.getPosition());
+                                                           if(tab.getPosition()==1 && !bestStoriesFetched ) {
+                                                               HelperClass.fetchDataBestStories();
+                                                               BestStoriesFragment.adapter.notifyDataSetChanged();
+                                                              bestStoriesFetched = !bestStoriesFetched;
+                                                           }
                                                        }
 
                                                        @Override
