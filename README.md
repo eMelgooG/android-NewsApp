@@ -3,7 +3,6 @@ The app uses HackerNews API: https://github.com/HackerNews/API for the content. 
 articles and lists them in a ListView on the MainActivity. Clicking an item in the ListView opens another activity which displays the 
 chosen article in a WebView.  
 
-Edit *3/2/2020* -> added lateral navigation  
 # Demo                                                    
      Before                                                            After adding lateral navigation
 ![](https://i.imgur.com/Bjz3kr9.gif)------------------------![](https://i.imgur.com/HDvWFf4.gif)
