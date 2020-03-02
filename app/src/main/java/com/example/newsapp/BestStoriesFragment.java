@@ -35,9 +35,13 @@ ListView listView;
                              Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.fragment_best_stories, container, false);
 
-           titles = new ArrayList<>();
-           urls = new ArrayList<>();
+        if(listView!=null)
+            listView.invalidateViews();
 
+        if(titles==null) {
+            titles = new ArrayList<>();
+            urls = new ArrayList<>();
+        }
 
         listView = (ListView) view.findViewById(R.id.listViewBestStories);
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titles);

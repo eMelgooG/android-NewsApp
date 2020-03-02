@@ -68,6 +68,10 @@ public static ArrayList<String> titles;
                                                                HelperClass.fetchDataBestStories();
                                                                BestStoriesFragment.adapter.notifyDataSetChanged();
                                                               bestStoriesFetched = !bestStoriesFetched;
+                                                           } else if (tab.getPosition() == 2 && !jobStoriesFetched) {
+                                                               HelperClass.fetchDataJobStories();
+                                                               JobsStoriesFragment.adapter.notifyDataSetChanged();
+                                                               jobStoriesFetched = !jobStoriesFetched;
                                                            }
                                                        }
 
