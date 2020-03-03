@@ -52,9 +52,9 @@ public static ArrayList<String> titles;
 
     titles = new ArrayList<>();
     urls = new ArrayList<>();
-        HelperClass.fetchDataNewStories();
 
 
+        HelperClass.fetchDataStories(HelperClass.HN_NEW_STORIES_LINK);
 
         //Setting listener to clicks
         viewPager.addOnPageChangeListener(new
@@ -65,12 +65,10 @@ public static ArrayList<String> titles;
                                                        public void onTabSelected(TabLayout.Tab tab) {
                                                            viewPager.setCurrentItem(tab.getPosition());
                                                            if(tab.getPosition()==1 && !bestStoriesFetched ) {
-                                                               HelperClass.fetchDataBestStories();
-                                                               BestStoriesFragment.adapter.notifyDataSetChanged();
+                                                               HelperClass.fetchDataStories(HelperClass.HN_TOP_STORIES_LINK);
                                                               bestStoriesFetched = !bestStoriesFetched;
                                                            } else if (tab.getPosition() == 2 && !jobStoriesFetched) {
-                                                               HelperClass.fetchDataJobStories();
-                                                               JobsStoriesFragment.adapter.notifyDataSetChanged();
+                                                               HelperClass.fetchDataStories(HelperClass.HN_JOB_STORIES_LINK);
                                                                jobStoriesFetched = !jobStoriesFetched;
                                                            }
                                                        }
@@ -83,6 +81,9 @@ public static ArrayList<String> titles;
                                                        public void onTabReselected(TabLayout.Tab tab) {
                                                        }
                                                    });
+
+
+
     }
 
 

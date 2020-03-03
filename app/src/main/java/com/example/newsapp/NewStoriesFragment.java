@@ -19,6 +19,7 @@ import android.widget.ListView;
  */
 public class NewStoriesFragment extends Fragment {
     ListView listView;
+    static ArrayAdapter<String> adapter;
     public NewStoriesFragment() {
         // Required empty public constructor
     }
@@ -29,7 +30,7 @@ public class NewStoriesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_stories,container,false);
         listView = (ListView) view.findViewById(R.id.listViewNewStories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,MainActivity.titles);
+       adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,MainActivity.titles);
 
         listView.setAdapter(adapter);
 
