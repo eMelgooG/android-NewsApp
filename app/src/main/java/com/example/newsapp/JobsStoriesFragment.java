@@ -3,6 +3,7 @@ package com.example.newsapp;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -39,12 +40,15 @@ static ArrayAdapter<String> adapter;
         if(listView!=null)
             listView.invalidateViews();
 
-        if(titles==null) {
-            titles = new ArrayList<>();
-            urls = new ArrayList<>();
-        }
 
             listView = (ListView) view.findViewById(R.id.listViewJobsStories);
+        if(savedInstanceState==null) {
+            titles = new ArrayList<>();
+            urls = new ArrayList<>();
+        } else {
+            titles = savedInstanceState.getStringArrayList("newTitles");
+            urls = savedInstanceState.getStringArrayList("newUrls");
+        }
             adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titles);
 
 
@@ -67,5 +71,12 @@ static ArrayAdapter<String> adapter;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList("newTitles",titles);
+        outState.putStringArrayList("newUrls",urls);
     }
 }

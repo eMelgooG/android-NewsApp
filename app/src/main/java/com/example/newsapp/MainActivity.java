@@ -1,5 +1,6 @@
 package com.example.newsapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
@@ -50,11 +51,17 @@ public static ArrayList<String> titles;
         final PageAdapter adapter = new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
-    titles = new ArrayList<>();
-    urls = new ArrayList<>();
-
-
-        HelperClass.fetchDataStories(HelperClass.HN_NEW_STORIES_LINK);
+        if(savedInstanceState==null) {
+            titles = new ArrayList<>();
+            urls = new ArrayList<>();
+            HelperClass.fetchDataStories(HelperClass.HN_NEW_STORIES_LINK);
+        } else {
+            bestStoriesFetched = savedInstanceState.getBoolean("bestStories");
+            jobStoriesFetched = savedInstanceState.getBoolean("jobStories");
+            titles = savedInstanceState.getStringArrayList("newTitles");
+            urls = savedInstanceState.getStringArrayList("newUrls");
+            NewStoriesFragment.adapter.notifyDataSetChanged();
+        }
 
         //Setting listener to clicks
         viewPager.addOnPageChangeListener(new
@@ -86,6 +93,12 @@ public static ArrayList<String> titles;
 
     }
 
-
-
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putStringArrayList("newTitles",titles);
+        outState.putStringArrayList("newUrls",urls);
+        outState.putBoolean("bestStories",bestStoriesFetched);
+        outState.putBoolean("jobStories",jobStoriesFetched);
+    }
 }
